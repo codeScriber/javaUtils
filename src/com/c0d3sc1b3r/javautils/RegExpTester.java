@@ -1,6 +1,5 @@
 package com.c0d3sc1b3r.javautils;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -11,16 +10,10 @@ public class RegExpTester {
         if ( ! validateArgs(args) ){
             help();
         }else {
-            String regexpToTest = args[1];
-            String textToMatch = args[2];
-            Pattern p = Pattern.compile(regexpToTest);
-            Matcher matcher = p.matcher(textToMatch);
-            if( matcher != null ){
-                System.out.println("got matcher");
-                if( matcher.find() ){
-                    System.out.println("has a match! ");
-                    System.out.println(matcher.toString());
-                }
+            String regexpToTest = args[0];
+            String textToMatch = args[1];
+            if( Pattern.matches(regexpToTest, textToMatch.trim()) ){
+                System.out.println("match!");
             }
         }
 
@@ -28,8 +21,8 @@ public class RegExpTester {
 
     public static boolean validateArgs(String[] args){
         boolean ok = args != null &&
-                args.length >= 3 &&
-                args[1] != null && args[2] != null;
+                args.length >= 2 &&
+                args[0] != null && args[1] != null;
         return ok;
     }
 
